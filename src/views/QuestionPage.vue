@@ -18,13 +18,15 @@ const answers = ref([])
 const { changeScore } = useScore()
 const showNotification = ref(false)
 const isCorrect = ref(false)
+const answerValue = ref(null)
 
-const handleAnswer = (points) => {
-  isCorrect.value = points > 0
+const handleAnswer = (answer) => {
+  isCorrect.value = answer.points > 0
+  answerValue.value = answer.answer
   showNotification.value = true
   //wait 3 seconds
   setTimeout(() => {
-    changeScore(points)
+    changeScore(answer.points)
     router.push('/')
   }, 1500)
 }
@@ -65,7 +67,7 @@ onUnmounted(() => {
         :key="answer.id"
         :class="colors.getColor(answer.id)"
         class="answer"
-        @click="handleAnswer(answer.points)"
+        @click="handleAnswer(answer)"
       >
         {{ answer.answer }}
       </div>
@@ -73,7 +75,7 @@ onUnmounted(() => {
     <DifficultyChip :difficulty="question.difficulty" />
   </div>
   <div v-else class="loading">Loading...</div>
-  <NotificationAnswer v-if="showNotification" :correct="isCorrect" />
+  <NotificationAnswer v-if="showNotification" :correct="isCorrect" :answer="answerValue" />
 </template>
 
 <style lang="postcss" scoped>

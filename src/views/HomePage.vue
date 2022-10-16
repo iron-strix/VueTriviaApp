@@ -14,6 +14,7 @@ onMounted(async () => {
   <BaseTitle>
     <template #logo> <img src="/logo.svg" alt="logo" /> </template>
     <h1 class="title">Vue Trivia App</h1>
+    <h1 class="title">Categories:</h1>
   </BaseTitle>
   <div v-if="categories.length > 0" class="categories">
     <RouterLink
@@ -21,7 +22,7 @@ onMounted(async () => {
       :key="category.id"
       :to="`/question/category/${category.id}`"
       class="category"
-      >Category - {{ category.name }}</RouterLink
+      >{{ category.name }}</RouterLink
     >
   </div>
 </template>
