@@ -12,7 +12,7 @@ onMounted(async () => {
 
 <template>
   <BaseTitle>
-    <template #logo> <img src="logo.svg" alt="logo" /> </template>
+    <template #logo> <img src="/logo.svg" alt="logo" /> </template>
     <h1 class="title">Vue Trivia App</h1>
   </BaseTitle>
   <div v-if="categories.length > 0" class="categories">
