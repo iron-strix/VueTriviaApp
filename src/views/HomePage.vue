@@ -1,13 +1,12 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import useAPI from '@/composables/useAPI.js'
 import BaseTitle from '@/components/BaseTitle.vue'
 
-const api = useAPI()
-const categories = ref([])
+const { categories, getCategories } = useAPI()
 
 onMounted(async () => {
-  categories.value = await api.getCategories()
+  await getCategories()
 })
 </script>
 
@@ -16,10 +15,10 @@ onMounted(async () => {
     <template #logo> <img src="logo.svg" alt="logo" /> </template>
     <h1 class="title">Vue Trivia App</h1>
   </BaseTitle>
-  <div class="categories">
+  <div v-if="categories.length > 0" class="categories">
     <RouterLink
       v-for="category in categories"
-      :key="category"
+      :key="category.id"
       :to="`/question/category/${category.id}`"
       class="category"
       >Category - {{ category.name }}</RouterLink
