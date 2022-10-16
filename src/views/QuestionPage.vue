@@ -65,7 +65,7 @@ onUnmounted(() => {
 <template>
   <div v-if="question && answers" class="question-container">
     <BaseTitle> {{ question.category }} </BaseTitle>
-    <p class="question">{{ question.question }}</p>
+    <p class="question" v-html="question.question"></p>
     <div class="answers">
       <div
         v-for="answer in answers"
@@ -74,7 +74,7 @@ onUnmounted(() => {
         class="answer"
         @click="handleAnswer(answer, answers)"
       >
-        {{ answer.answer }}
+        <div v-html="answer.answer"></div>
       </div>
     </div>
     <DifficultyChip :difficulty="question.difficulty" />
