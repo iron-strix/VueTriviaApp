@@ -17,7 +17,7 @@
   }
 
   & .title {
-    @apply text-5xl uppercase tracking-wide text-gray-200;
+    @apply text-center text-5xl uppercase tracking-wide text-gray-200;
   }
 }
 </style>
