@@ -20,15 +20,20 @@ const showNotification = ref(false)
 const isCorrect = ref(false)
 const answerValue = ref(null)
 
-const handleAnswer = (answer) => {
+const handleAnswer = (answer, answers) => {
   isCorrect.value = answer.points > 0
-  answerValue.value = answer.answer
+
+  for (const object of answers) {
+    if (object.points > 0) {
+      answerValue.value = object.answer
+    }
+  }
   showNotification.value = true
   //wait 3 seconds
   setTimeout(() => {
     changeScore(answer.points)
     router.push('/')
-  }, 1500)
+  }, 2500)
 }
 
 onMounted(async () => {
@@ -67,7 +72,7 @@ onUnmounted(() => {
         :key="answer.id"
         :class="colors.getColor(answer.id)"
         class="answer"
-        @click="handleAnswer(answer)"
+        @click="handleAnswer(answer, answers)"
       >
         {{ answer.answer }}
       </div>
